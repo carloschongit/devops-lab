@@ -31,3 +31,46 @@ Solo se describe el comportamiento esperado.
 notes/ → documentación del proceso
 ci-cd/ → definición futura del pipeline
 docker/ → lugar donde vivirá el build más adelante
+
+## Secuencia que una máquina debería ejecutar
+
+Estas instrucciones están escritas como pasos determinísticos:
+
+1. Obtener código del repositorio.
+2. Posicionarse en la raíz del proyecto.
+3. Ejecutar proceso de construcción definido por el proyecto.
+4. Confirmar resultado exitoso.
+5. Marcar versión como válida.
+
+## Equivalente en comandos (referencia)
+
+git clone <repo>
+cd devops-lab
+
+# build (actualmente manual)
+
+# docker build ...
+
+Estos comandos aún no serán automatizados.
+Solo se documentan.
+
+## Por qué el pipeline también debe versionarse
+
+El proceso de build debe vivir en el repositorio.
+No debe depender de memoria humana.
+Debe poder reconstruirse desde cero solo con el repo.
+
+## Estado del proyecto hoy
+
+Fase: previa a CI real.
+
+Ya existe:
+
+- repositorio estructurado
+- aplicación funcional
+- documentación base
+
+Aún no existe:
+
+- ejecución automática
+- validaciones automáticas
