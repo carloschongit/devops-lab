@@ -4,15 +4,21 @@
 # Este script representa lo que un sistema CI ejecutará automáticamente.
 # Aún se ejecuta manualmente en esta fase del laboratorio.
 
+echo "Running manual CI pipeline simulation"
+
+echo "Project: devops-lab"
+date
+
 echo "=== PIPELINE START ==="
 
-echo "1. Verificando repositorio..."
+echo "Step 1 - Validate repository state"
 git status
 
-echo "2. Confirmando ubicación del proyecto..."
+echo "Step 2 - Confirm project location"
 pwd
 
-echo "3. Listando estructura del proyecto..."
-ls
+echo "Step 3 - Inspect project structure"
+ls - R
 
-echo "=== PIPELINE END ==="
+echo "Pipeline simulation complete successfully"
+
