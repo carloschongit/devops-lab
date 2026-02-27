@@ -22,3 +22,25 @@ ls - R
 
 echo "Pipeline simulation complete successfully"
 
+set -e
+
+echo "==Pre-run validation phase =="
+
+if [ ! -f "Licence"]; then
+    echo "ERROR: Licence not found. Run script from project root."
+    exit 1
+fi
+
+if [ ! -d "automation" ]; then
+    echo "ERROR: automation directory missing."
+    exit 1
+fi
+
+if ! command -v git >/dev/null 2/&1; then 
+    echo "ERROR: git is not available in PATH."
+    exit 1
+fi
+
+echo "Environment validation passed."
+echo "Starting pipeline..."
+
