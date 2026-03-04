@@ -8,6 +8,7 @@ set -Eeuo pipefail
 
 PIPELINE_NAME="DEVOPS-LAB PIPELINE"
 RUN_ID=$(date +"%Y%m%d-%H%M%S")
+PIPELINE_STATUS="SUCCESS"
 PIPELINE_START_TIME=$(date +%s)
 CURRENT_STAGE="INIT"
 
@@ -15,15 +16,17 @@ log() {
   echo "[${PIPELINE_NAME}] [RUN:${RUN_ID}] $1"
 }
 handle_error() {
-local exit_code=$?
+local exit_code=$1
+
 echo ""
 echo "X PIPELINE FAILED"
 echo "Stage: ${CURRENT_STAGE}"
 echo "Exit Code: ${exit_code}"
 echo "Timestamp: $(date)"
-exit $exit_code
+
+exit ${exit_code}
 }
-trap 'handle_error' ERR
+trap 'exit_code=$?; PIPELINE_STATUS="FAILED"; handle_error ${LINENO}' ERR
 
 
 stage() {
@@ -72,10 +75,8 @@ build() {
 test_phase() {
     stage "TEST"
     log "Simulating validation test"
-    
-    #Simulacion de test controlado
     echo "Running dummy test..."
-    true
+    false
     end_stage
 }
 
