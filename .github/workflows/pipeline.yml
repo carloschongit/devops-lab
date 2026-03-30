@@ -19,10 +19,23 @@ jobs:
       - name: Build Docker image
         run: docker build -t devops-lab-web:${{ github.sha }} ./docker
 
+      - name: Generate build metadata
+        run: |
+          mkdir -p artifacts
+          echo "commit_sha=${{ github.sha }}" > artifacts/build-info.txt
+          echo "build_date=$(date)" >> artifacts/build-info.txt
+          echo "image_tag=devops-lab-web:${{ github.sha }}" >> artifacts/build-info.txt
+
+      - name: Upload build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-metadata
+          path: artifacts/build-info.txt
+
       - name: Run container test
         run: |
           docker rm -f test-container || true
-          docker run -d -p 8080:80 --name test-container devops-lab-web:${{ github.sha}}
+          docker run -d -p 8080:80 --name test-container devops-lab-web:${{ github.sha }}
           sleep 5
       - name: Health check
         run: |
