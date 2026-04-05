@@ -1,4 +1,4 @@
-#!/opt/homebrew/bin/bash
+#!/usr/bin/env bash
 
 # Simulación de ejecución de pipeline
 # Este script representa lo que un sistema CI ejecutará automáticamente.
